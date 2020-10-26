@@ -1,0 +1,25 @@
+---
+initial: True
+code: |
+  as_of_date = "Effective as of October, 2020"
+  calcDate = today()
+  
+  # Parameters needing annual updates
+  PCT_TO_EARNED_INCOME_DED = 0.20
+  MEDICAL_THRESHOLD = 35
+  SHELTER_DED_CAP = 586
+  HOMELESS_DED = 156.74
+  NET_INCOME_PCT = 0.30
+  MINIMUM_SIZE_OF_HOUSEHOLD = 2
+  MINIMUM_GRANT = 16
+  PHONE = 45
+  NON_HEATING_UTILITY = 396
+  HEATING_UTILITY = 646
+  arrTwoHundredTable = [2127, 2873, 3620, 4367, 5113, 5860, 6607, 7353, 747]
+  arrStdDed = [167, 167, 167, 181, 212, 243]
+  arrMaxAllowableNIC = [990, 1335, 1680, 2025, 2370, 2715, 3061, 3408, 347]
+  arrMaxSNAPAllotment = [204, 374, 535, 680, 807, 969, 1071, 1224, 153]
+  # Standard utility allowance - heating, non-heating, zero util, telephone
+  arrStdUtilAllowance = [HEATING_UTILITY, NON_HEATING_UTILITY, 0.00, PHONE] 
+  # Asset test  
+  AssetTest_Threshold = 3500

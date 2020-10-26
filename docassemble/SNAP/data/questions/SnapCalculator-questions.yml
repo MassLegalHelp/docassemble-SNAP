@@ -1,0 +1,195 @@
+---
+mandatory: true
+code: |
+  # Set Defaults for internal testing - comment out before release     
+  #ElderlyOrDisabled = "Yes"
+  #isHomeless = "No"
+  #hasDependent = "No"  
+  #Uneared_Income = "Mthly"
+  #Earned_Income = "biWkly"
+  #paysAC = "No"
+  #paysElec = "No"
+  #paysTelephone = "Yes"
+  
+  # Set defaults for 11 currency fields.
+  biWUI = 0  
+  WUI = 0
+  MUI = 0      
+  biWEI = 0
+  WEI = 0
+  MEI = 0
+  ChildSupport = 0  
+  MedDed = 0
+  DepCareDed = 0
+  RentMortgageDed = 0
+  HomeownerDed = 0
+
+---
+id: Questions
+question: |
+subquestion: |
+  **<span class="navy">[${as_of_date}]</span>**
+  
+  Welcome to the *Massachusetts SNAP online calculator* built by MLRI!  
+  
+  Use this calculator to estimate the amount of monthly SNAP benefits a household may receive in Massachusetts. The calculator is for people familiar with the basic SNAP rules. 
+  
+  This calculator follows the SNAP math rules for most households. Review the SNAP Advocacy Guide to learn who needs to be part of a SNAP household, what income counts, what expenses can be claimed, and how  the SNAP math works if the household contains an ineligible member.  
+  
+  <span class="navy">**Household Composition**</span> 
+fields:
+  - Household size: HHSize  
+    datatype: integer    
+  - Does the household include any members age 60+ or receiving a disability-based benefit?: ElderlyOrDisabled 
+    input type: radio
+    choices:
+      - Yes
+      - No      
+  - Does the household have child care or disabled adult care costs?: hasDependent  
+    input type: radio
+    choices:
+      - Yes
+      - No    
+  - note: |
+      <span class="navy">**Income**</span>    
+      
+      <span class="title_color">Enter Gross __*Unearned*__ Income</span><br>
+      Unemployment Comp, SSI, Social Security, Pensions, Veterans Benefits, Child Support, DTA cash assistance.
+  - Income frequency : Uneared_Income
+    input type: radio
+    choices:
+      - Monthly: Mthly
+      - Biweekly: biWkly   
+      - Weekly: Wkly  
+      - None: None
+  - Monthly amount: MUI
+    datatype: currency   
+    show if:
+      variable: Uneared_Income
+      is: Mthly
+  - Biweekly amount: biWUI
+    datatype: currency
+    step: 1
+    show if:
+      variable: Uneared_Income
+      is: biWkly
+  - Weekly amount: WUI
+    datatype: currency
+    step: 1
+    show if:
+      variable: Uneared_Income
+      is: Wkly
+  - note: |  
+      <span class="title_color">Enter Gross __*Earned*__ Income</span><br>
+      Wages or salaries. For self-employment, including independent contractors, input gross income after business expenses.
+  - Income frequency : Earned_Income
+    input type: radio
+    choices:
+      - Monthly: Mthly
+      - Biweekly: biWkly   
+      - Weekly: Wkly 
+      - None: None 
+  - Monthly amount: MEI
+    datatype: currency
+    show if:
+      variable: Earned_Income
+      is: Mthly
+  - Biweekly amount: biWEI
+    datatype: currency  
+    show if:
+      variable: Earned_Income
+      is: biWkly
+  - Weekly amount: WEI
+    datatype: currency  
+    show if:
+      variable: Earned_Income
+      is: Wkly
+  - html: <span class="navy"><b>Expenses</b></span>       
+  - note: |
+      <span class="title_color">Enter Monthly Child Support Amount</span>  
+  - Child support both legally obligated and paid out by the household: ChildSupport
+    datatype: currency        
+  - note: |
+      <span class="title_color">Enter Monthly Medical Costs</span>      
+      *Standard $155 deduction allowed if expenses are $35-$190/month. If costs are over $190, then the deduction is the actual amount minus $35.
+    show if:
+      variable: ElderlyOrDisabled
+      is: Yes
+  - Health Care Costs, including over-the-counter health care items and transportation: MedDed
+    datatype: currency        
+    show if:
+      variable: ElderlyOrDisabled
+      is: Yes
+  - note: |
+      <span class="title_color">Enter Monthly Dependent Care Costs for Children or Disabled Adults</span>  
+    show if:
+      variable: hasDependent
+      is: Yes
+  - Include the costs of any child or adult daycare, babysitting, before/after school care, transportation: DepCareDed
+    datatype: currency        
+    show if:
+      variable: hasDependent
+      is: Yes    
+  - html: <span class="title_color">Enter Monthly Shelter Costs</span>
+  - Is the household currently homeless?: isHomeless  
+    input type: radio
+    choices:
+      - Yes
+      - No  
+  - Monthly rent or mortgage amount: RentMortgageDed
+    datatype: currency        
+    show if:
+      variable: isHomeless
+      is: No
+  - Additional monthly homeowner expenses, including homeowner insurance and property tax: HomeownerDed
+    datatype: currency        
+    show if:
+      variable: isHomeless
+      is: No  
+  - Does the household have any heat or air conditioning costs (any time of year), or received Fuel Assistance in the last 12 months?: paysAC
+    input type: radio
+    choices:
+      - Yes
+      - No    
+    show if:
+      variable: isHomeless
+      is: No
+  - Does the household pay for electricity for non-heating purposes or for trash collection?: paysElec
+    input type: radio
+    choices:
+      - Yes
+      - No    
+    show if:
+      variable: paysAC
+      is: No
+  - Does the household pay for its own telephone service?: paysTelephone
+    input type: radio
+    choices:
+      - Yes
+      - No    
+    show if:
+      variable: paysElec
+      is: No
+continue button label: See Results
+---
+id: downloadChoice
+comment: |
+  Display the major results on the screen, and let the user choose what to download.  
+question: |
+  % if FinalResult <= 0:
+  You do not seem to be eligible for SNAP benefits.
+  % else:
+  You may be eligible for SNAP benefits.<br />
+  If you apply and are approved, your benefit may be ${ currency(FinalResult) }  per month.
+  % endif
+
+  ${ AssetTestScreenMsg }
+fields:
+  - Learn more or print results: print_options
+    datatype: checkboxes
+    choices:
+      - Summary of possible SNAP benefits and how to apply: Summary
+      - Calculation Details: Details
+      - View DTA Inputs: Inputs   
+continue button label: Finish
+   
