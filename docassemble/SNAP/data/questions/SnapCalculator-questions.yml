@@ -107,11 +107,11 @@ fields:
   - html: <span class="navy"><b>Expenses</b></span>       
   - note: |
       <span class="title_color">Enter Monthly Child Support Amount</span>  
-  - Child support both legally obligated and paid out by the household: ChildSupport
+  - Child support paid by the household that is legally obligated: ChildSupport
     datatype: currency        
   - note: |
       <span class="title_color">Enter Monthly Medical Costs</span>      
-      *Standard $155 deduction allowed if expenses are $35-$190/month. If costs are over $190, then the deduction is the actual amount minus $35.
+      *A standard $155 deduction is allowed if medical expenses are $35/month or more.  But if actual expenses are greater than $190/mo, the full amount of the expenses is allowed as a deduction.
     show if:
       variable: ElderlyOrDisabled
       is: Yes
