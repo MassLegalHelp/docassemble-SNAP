@@ -15,10 +15,10 @@ code: |
   PHONE = 45
   NON_HEATING_UTILITY = 396
   HEATING_UTILITY = 646
-  arrTwoHundredTable = [2127, 2873, 3620, 4367, 5113, 5860, 6607, 7353, 747]
+  arrTwoHundredTable = [2147, 2903, 3660, 4417, 5173, 5930, 6687, 7443, 757]
   arrStdDed = [167, 167, 167, 181, 212, 243]
   arrMaxAllowableNIC = [990, 1335, 1680, 2025, 2370, 2715, 3061, 3408, 347]
-  arrMaxSNAPAllotment = [204, 374, 535, 680, 807, 969, 1071, 1224, 153]
+  arrMaxSNAPAllotment = [234, 430, 616, 782, 929, 1114, 1232, 1408, 176]
   # Standard utility allowance - heating, non-heating, zero util, telephone
   arrStdUtilAllowance = [HEATING_UTILITY, NON_HEATING_UTILITY, 0.00, PHONE] 
   # Asset test  

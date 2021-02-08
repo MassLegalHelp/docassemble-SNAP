@@ -32,9 +32,11 @@ subquestion: |
   
   Welcome to the *Massachusetts SNAP online calculator* built by MLRI!  
   
-  Use this calculator to estimate the amount of monthly SNAP benefits a household may receive in Massachusetts. The calculator is for people familiar with the basic SNAP rules. 
+  Use this calculator to estimate the amount of monthly SNAP benefits a household may receive in Massachusetts. 
   
-  This calculator follows the SNAP math rules for most households. Review the SNAP Advocacy Guide to learn who needs to be part of a SNAP household, what income counts, what expenses can be claimed, and how  the SNAP math works if the household contains an ineligible member.  
+  Due to the COVID-19 pandemic, all households eligible for a SNAP benefit receive the maximum SNAP amount for their household size (if regular SNAP is less than the maximum grant, the rest is issued via a supplemental payment). Also, effective January to June 2021 SNAP benefit amounts are increased by 15%. This calculator includes the 15% boost but not the supplement. DTA pays out the supplement and the 15% boost on the second business day of each month (often a different date than the SNAP household's regular issuance date).See MassLegalServices.org/DTA-COVID-19 to learn more.
+
+  The calculator is for people familiar with the basic SNAP rules and it follows the SNAP math rules for most households. Review the SNAP Advocacy Guide to learn who needs to be part of a SNAP household, what income counts, what expenses can be claimed, and how the SNAP math works if the household contains an ineligible member.
   
   <span class="navy">**Household Composition**</span> 
 fields:
