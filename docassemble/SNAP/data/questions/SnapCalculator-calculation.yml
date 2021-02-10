@@ -143,10 +143,10 @@ code: |
   tempFinal = MaxSNAPAllotment - Step41
   FinalResult = 0
 	if GITResult == "PASSED" and NICTestResult == "PASSED":  		
-    if HHSize <= MINIMUM_SIZE_OF_HOUSEHOLD:
+    if HHSize <= MINIMUM_SIZE_OF_HOUSEHOLD: 
       FinalResult = max(tempFinal, MINIMUM_GRANT)
     else:
-      FinalResult = tempFinal
+      FinalResult = tempFinal  
   # Asset test message
   if ApplyNetAssetTest == "Yes" and FinalResult > 0:   
     AssetTestScreenMsg = "To get SNAP benefits, your assets must be " + currency(AssetTest_Threshold) + " or less.  See the SNAP Advocacy Guide <a href='https://www.masslegalservices.org/FoodStampSNAPAdvocacyGuide'>masslegalservices.org/FoodStampSNAPAdvocacyGuide</a> for more information."
