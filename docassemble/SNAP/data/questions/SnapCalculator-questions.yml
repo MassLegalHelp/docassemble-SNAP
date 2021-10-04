@@ -32,9 +32,8 @@ subquestion: |
   
   Welcome to MLRI's **Massachusetts SNAP online calculator** where you can estimate monthly SNAP benefits for Massachusetts households. Note, during the COVID-19 pandemic:
 
-  * All households eligible for a SNAP benefit currently receive the maximum SNAP amount for their household size. If not getting the maximum, DTA issues a SNAP supplement on the 2nd business day of the following month.
-  * From January to June 2021, SNAP benefit amounts are increased by 15%. DTA also issues the 15% boost amount on the 2nd business day of the following month.
-  * This SNAP calculator includes the 15% boost in the SNAP math. This calculator does not include the supplemental payments issued to households not already at the maximum grant amount. See [MassLegalServices.org/DTA-COVID-19](https://MassLegalServices.org/DTA-COVID-19) to learn more.
+  * All households eligible for a SNAP benefit currently receive at least the maximum SNAP amount for their household size. DTA issues this SNAP supplement to all households on the 2nd business day of the month.  
+  * This calculator does not include the COVID supplemental payments. See [MassLegalServices.org/DTA-COVID-19](https://MassLegalServices.org/DTA-COVID-19) to learn more.
 
   Please review the SNAP Advocacy Guide to learn who needs to be part of a SNAP household, what income counts, what expenses can be claimed, and how the SNAP math works if the household contains an ineligible member.
   
@@ -178,11 +177,14 @@ id: downloadChoice
 comment: |
   Display the major results on the screen, and let the user choose what to download.  
 question: |
+subquestion: |
   % if FinalResult <= 0:
-  You do not seem to be eligible for SNAP benefits.
+  ####You do not seem to be eligible for SNAP benefits.
   % else:
-  You may be eligible for SNAP benefits.<br />
-  If you apply and are approved, your benefit may be ${ currency(FinalResult) }  per month.
+  ####You may be eligible for SNAP benefits.
+  ####If you apply and are approved, your benefit may be <span style="color: red">${ currency(FinalResult) }</span> per month.<br>
+  **NOTE:** The amount above does not include the extra COVID supplemental SNAP currently in place.<br><br>
+  See [MassLegalServices.org/DTA-COVID-19](https://MassLegalServices.org/DTA-COVID-19) for more information.
   % endif
 
   ${ AssetTestScreenMsg }
