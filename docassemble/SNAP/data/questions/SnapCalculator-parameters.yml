@@ -1,7 +1,7 @@
 ---
 initial: True
 code: |
-  as_of_date = "Effective as of February, 2022"
+  as_of_date = "Effective as of March, 2022"
   calcDate = today()
   
   # Parameters needing annual updates
@@ -12,9 +12,9 @@ code: |
   NET_INCOME_PCT = 0.30
   MINIMUM_SIZE_OF_HOUSEHOLD = 2
   MINIMUM_GRANT = 20
-  PHONE = 48
-  NON_HEATING_UTILITY = 421
-  HEATING_UTILITY = 688
+  PHONE = 50
+  NON_HEATING_UTILITY = 437
+  HEATING_UTILITY = 714  
   arrTwoHundredTable = [2265, 3052, 3839, 4625, 5412, 6199, 6985, 7772, 787]
   arrStdDed = [177, 177, 177, 184, 215, 246]
   arrMaxAllowableNIC = [1074, 1452, 1830, 2209, 2587, 2965, 3344, 3722, 379]
