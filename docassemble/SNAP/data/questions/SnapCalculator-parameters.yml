@@ -1,7 +1,7 @@
 ---
 initial: True
 code: |
-  as_of_date = "Effective as of February, 2022"
+  as_of_date = "Effective as of March, 2022"
   calcDate = today()
   
   # Parameters needing annual updates
