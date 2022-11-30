@@ -12,11 +12,12 @@ metadata:
 features:
   question back button: True
   navigation back button: False
-  css: snap.css    
+  # theme file downloaded from: bootstrap theme: https://bootswatch.com/cerulean/bootstrap.min.css
+  css: 
+    - snap.css
+    - bootstrap.min.css
   #hide navbar: True 
   debug: False
-  bootstrap theme: https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cerulean/bootstrap.min.css
-
 ---
 modules:
   - docassemble.base.core
