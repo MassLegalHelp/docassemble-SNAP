@@ -6,6 +6,7 @@ from distutils.util import convert_path
 
 standard_exclude = ('*.pyc', '*~', '.*', '*.bak', '*.swp*')
 standard_exclude_directories = ('.*', 'CVS', '_darcs', './build', './dist', 'EGG-INFO', '*.egg-info')
+
 def find_package_data(where='.', package='', exclude=standard_exclude, exclude_directories=standard_exclude_directories):
     out = {}
     stack = [(convert_path(where), '', package)]
@@ -43,7 +44,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.SNAP',
-      version='1.5.1',
+      version='1.6.0',
       description=('SNAP Calculator'),
       long_description='Massachusetts SNAP Online Calculator. \r\n\r\nIt is intended to be used by people familiar with the basic SNAP rules to estimate the monthly SNAP benefit amount a household may receive in Massachusetts. \r\n\r\n#Authors:\r\nRochelle Hahn\r\nPat Baker\r\nVictoria Negus\r\nPurple Sky',
       long_description_content_type='text/markdown',
