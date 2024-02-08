@@ -15,7 +15,7 @@ code: |
   PHONE = 59
   NON_HEATING_UTILITY = 520
   HEATING_UTILITY = 852  
-  arrTwoHundredTable = [2430, 3287, 4143, 5000, 5857, 6713, 7570, 8427, 857]
+  arrTwoHundredTable = [2510, 3407, 4303, 5200, 6097, 6993, 7890, 8787, 897]
   arrStdDed = [198, 198, 198, 208, 244, 279]
   arrMaxAllowableNIC = [1215, 1644, 2072, 2500, 2929, 3357, 3785, 4214, 429]
   arrMaxSNAPAllotment = [291, 535, 766, 973, 1155, 1386, 1532, 1751, 219]
