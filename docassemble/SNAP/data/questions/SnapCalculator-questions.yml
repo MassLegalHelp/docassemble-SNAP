@@ -30,12 +30,9 @@ question: |
 subquestion: |
   **<span class="navy">[${as_of_date}]</span>**
   
-  Welcome to MLRI's **Massachusetts SNAP online calculator** where you can estimate monthly SNAP benefits for Massachusetts households. Note, during the COVID-19 pandemic:
+  Welcome to MLRI's **Massachusetts SNAP online calculator** where you can estimate monthly SNAP benefits for Massachusetts households. 
 
-  * All households eligible for a SNAP benefit currently receive at least the maximum SNAP amount for their household size. DTA issues this SNAP supplement to all households on the 2nd business day of the month.  
-  * This calculator does not include the COVID supplemental payments. See [MassLegalServices.org/DTA-COVID-19](https://MassLegalServices.org/DTA-COVID-19) to learn more.
-
-  Please review the SNAP Advocacy Guide to learn who needs to be part of a SNAP household, what income counts, what expenses can be claimed, and how the SNAP math works if the household contains an ineligible member.
+  Please review the [SNAP Advocacy Guide](https://www.masslegalservices.org/content/2024-snap-advocacy-guide) to learn who needs to be part of a SNAP household, what income counts, what expenses can be claimed, and how the SNAP math works if the household contains an ineligible member.
   
   <span class="navy">**Household Composition**</span> 
 fields:
@@ -183,8 +180,6 @@ subquestion: |
   % else:
   ####You may be eligible for SNAP benefits.
   ####If you apply and are approved, your benefit may be <span style="color: red">${ currency(FinalResult) }</span> per month.<br>
-  **NOTE:** The amount above does not include the extra COVID supplemental SNAP currently in place.<br><br>
-  See [MassLegalServices.org/DTA-COVID-19](https://MassLegalServices.org/DTA-COVID-19) for more information.
   % endif
 
   ${ AssetTestScreenMsg }
