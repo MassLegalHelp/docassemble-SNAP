@@ -1,0 +1,154 @@
+---
+code: |
+  # Set defaults for Conditionally hidden fields.
+  if isHomeless == "Yes":  
+    paysAC = "No"
+    paysElec = "No"
+    paysTelephone = "No"
+  else:
+    if paysAC == "Yes":
+      paysElec = "No"
+      paysTelephone = "No"
+    elif paysElec == "Yes":
+      paysTelephone = "No"
+
+  # Step 1. Household - nothing to do here.
+  # Step 2. Gross Income Test
+  #2.1 Convert weekly and biweekly income to monthly amount
+  WUIC = WUI * 4.333    
+  biWUIC = biWUI * 2.17
+  WEIC = WEI * 4.333
+  biWEIC = biWEI * 2.17  
+  #2.2 Gross Earned and Unearned amounts.   
+  GMUI = round(MUI + WUIC + biWUIC, 0)
+  GMEI = round(MEI + WEIC + biWEIC, 0)  
+  #2.3 Add up Unearned and Earned income
+  TGMI = round(GMUI + GMEI - ChildSupport, 0)
+  # 200% poverty level/gross income test for HH
+  if HHSize <= 8:
+    TwoHundredPctPov = arrTwoHundredTable[HHSize-1]
+  else:            
+   TwoHundredPctPov = arrTwoHundredTable[7]+((HHSize-8)*arrTwoHundredTable[8])
+  # Does Asset test apply?
+  if ElderlyOrDisabled == "Yes" and TGMI > TwoHundredPctPov:
+    ApplyAssetTest = "Yes, assets must be <=" + currency(AssetTest_Threshold)
+    ApplyNetAssetTest = "Yes"       
+  else:
+    ApplyAssetTest = "No"  				
+	  ApplyNetAssetTest = "No"     
+  # Gross Income Test Result
+  if ElderlyOrDisabled == "No":
+    if TGMI < TwoHundredPctPov:
+      GITResult = "PASSED"
+    else:
+      GITResult = "FAILED"      	
+  else:
+    GITResult = "PASSED"  
+  
+  # Step 3. Net Income Test
+  # 3-1-A. Standard Deduction
+  if HHSize < 6:
+    StdDed = arrStdDed[HHSize-1]
+  else:
+   StdDed = arrStdDed[5]
+  # 3-1-B. Earned income deduction
+  EarnedDed = GMEI * PCT_TO_EARNED_INCOME_DED
+  # 3-1-C. Medical deductions  
+  ExcessMedDed = 0
+  if ElderlyOrDisabled == "Yes":	  
+    ElderlyOrDisabled1 = "Yes" #for 2nd display in docx.
+    temp = MedDed - MEDICAL_THRESHOLD
+    if MedDed > 190:	
+      ExcessMedDed = temp			
+		elif temp > 0:		  
+      ExcessMedDed = 155.00
+  else:        
+    ElderlyOrDisabled1 = "No"	
+    
+  # 3-1 Total
+  totDeduction = StdDed + EarnedDed + ExcessMedDed + DepCareDed
+  tempSum = TGMI - totDeduction
+  PreAdjAfterDed = max(0, tempSum)
+  # 3.2 Expense Deductions
+  # Shelter deductions
+  if isHomeless == "Yes":  	  
+    TotShelterDed = 0       
+  else:
+    TotShelterDed = RentMortgageDed + HomeownerDed
+  
+	StdUtilAllowance = 0
+  if paysAC == "Yes":
+		UtilStatus = "Heating"
+		StdUtilAllowance = arrStdUtilAllowance[0]
+	elif paysElec == "Yes":
+		UtilStatus = "Non-heating"
+		StdUtilAllowance = arrStdUtilAllowance[1]
+	elif paysTelephone == "Yes":
+		UtilStatus = "Telephone"
+		StdUtilAllowance = arrStdUtilAllowance[3]
+	else:
+		UtilStatus = "Zero Expense"
+		StdUtilAllowance = arrStdUtilAllowance[2]
+  # special treatement for medical expense
+	TotShelterCosts = TotShelterDed + StdUtilAllowance
+	# 50% adjusted income calculations
+	FiftyPctAdjIC = PreAdjAfterDed * 0.50
+	# Shelter deduction in excess of 50% of adjusted income
+	ShelterDedExcessFiftyPct = max(0, TotShelterCosts - FiftyPctAdjIC)	
+	CapShelterDed = SHELTER_DED_CAP  
+  # 3-2-A. Shelter Deduction Result
+	if ElderlyOrDisabled == "Yes":
+		ShelterDedResult = ShelterDedExcessFiftyPct
+	else:
+		ShelterDedResult = min(ShelterDedExcessFiftyPct, CapShelterDed)
+  # 3-2-B. Homeless Deduction
+  if isHomeless == "Yes":
+    HomelessDed = HOMELESS_DED
+  else:
+    HomelessDed = 0
+  # 3-3. Net Income Calculation
+  MonthlyNIC = PreAdjAfterDed - HomelessDed - ShelterDedResult
+  MonthlyNICforDisplay = str(currency(round(MonthlyNIC,0)))
+  MaxTotMonthlyNIC = 0
+	if ApplyNetAssetTest == "No":
+		if MonthlyNIC < 0:			
+      MaxTotMonthlyNICLable = str(currency(round(MaxTotMonthlyNIC,0)))
+		else:
+			MaxTotMonthlyNIC = 1000000
+      MaxTotMonthlyNICLable = "No Limit"  
+  # the above 100000 is an arbitrarily large number so that no once can hit it.
+	if ApplyNetAssetTest == "Yes":
+    MaxTotMonthlyNICLable = str(currency(round(MaxTotMonthlyNIC,0)))
+    if(HHSize <= 8):
+      MaxTotMonthlyNIC = arrMaxAllowableNIC[HHSize-1]
+    else:
+      MaxTotMonthlyNIC = arrMaxAllowableNIC[7]+((HHSize-8)*arrMaxAllowableNIC[8])  
+  # 3-3. NET INCOME TEST result:	
+  if MaxTotMonthlyNIC >= 100000:
+		NICTestResult = "PASSED"    
+	elif MonthlyNIC < MaxTotMonthlyNIC:
+		NICTestResult = "PASSED"    
+	else:
+		NICTestResult = "FAILED"
+  # Step 4. Final Determination
+  ThirtyPctNIC = max(0, round(MonthlyNIC * NET_INCOME_PCT,0));
+	if ThirtyPctNIC > 0:
+		Step41 = ThirtyPctNIC
+	else:
+		Step41 = 0.0
+	if HHSize <= 8:
+		MaxSNAPAllotment = arrMaxSNAPAllotment[HHSize-1]
+	else:
+		MaxSNAPAllotment = arrMaxSNAPAllotment[7]+((HHSize-8)*arrMaxSNAPAllotment[8])
+  tempFinal = MaxSNAPAllotment - Step41
+  FinalResult = 0
+	if GITResult == "PASSED" and NICTestResult == "PASSED":  		
+    if HHSize <= MINIMUM_SIZE_OF_HOUSEHOLD: 
+      FinalResult = max(tempFinal, MINIMUM_GRANT)
+    else:
+      FinalResult = tempFinal  
+  # Asset test message
+  if ApplyNetAssetTest == "Yes" and FinalResult > 0:   
+    AssetTestScreenMsg = "To get SNAP benefits, your assets must be " + currency(AssetTest_Threshold) + " or less.  See the SNAP Advocacy Guide <a href='https://www.masslegalservices.org/FoodStampSNAPAdvocacyGuide'>masslegalservices.org/FoodStampSNAPAdvocacyGuide</a> for more information."
+  else:    
+    AssetTestScreenMsg = ""

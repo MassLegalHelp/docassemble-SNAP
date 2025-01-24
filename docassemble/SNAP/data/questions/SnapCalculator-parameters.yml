@@ -1,0 +1,25 @@
+---
+initial: True
+code: |
+  as_of_date = "Effective as of January 24, 2025"
+  calcDate = today()
+  
+  # Parameters needing (semi)annual updates
+  PCT_TO_EARNED_INCOME_DED = 0.20
+  MEDICAL_THRESHOLD = 35
+  SHELTER_DED_CAP = 712
+  HOMELESS_DED = 190
+  NET_INCOME_PCT = 0.30
+  MINIMUM_SIZE_OF_HOUSEHOLD = 2
+  MINIMUM_GRANT = 23
+  PHONE = 62
+  NON_HEATING_UTILITY = 542
+  HEATING_UTILITY = 890
+  arrTwoHundredTable = [2608, 3525, 4442, 5358, 6275, 7192, 8108, 9025, 917]
+  arrStdDed = [204, 204, 204, 217, 254, 291]
+  arrMaxAllowableNIC = [1255, 1704, 2152, 2600, 3049, 3497, 3945, 4394, 449]
+  arrMaxSNAPAllotment = [292, 536, 768, 975, 1158, 1390, 1536, 1756, 220]
+  # Standard utility allowance - heating, non-heating, zero util, telephone
+  arrStdUtilAllowance = [HEATING_UTILITY, NON_HEATING_UTILITY, 0.00, PHONE]
+  # Asset test  
+  AssetTest_Threshold = 4500

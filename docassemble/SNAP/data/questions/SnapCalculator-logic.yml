@@ -1,0 +1,92 @@
+---
+metadata:
+  title: |
+    Massachusetts SNAP Calculator
+  short title: |
+    MA SNAP Calculator
+  description: |
+    Massachusetts SNAP calculator is intended to be used by people familiar with the basic SNAP rules to estimate the monthly SNAP benefit amount a household may receive in Massachusetts. 
+  exit url: https://www.masslegalservices.org/content/online-snap-calculator
+  show login: False
+---
+features:
+  question back button: True
+  navigation back button: False
+  # theme file downloaded from: bootstrap theme: https://bootswatch.com/cerulean/bootstrap.min.css
+  css: 
+    - snap.css
+    - bootstrap.min.css
+  #hide navbar: True 
+  debug: False
+---
+modules:
+  - docassemble.base.core
+---
+include:
+  - SnapCalculator-parameters.yml
+  - SnapCalculator-questions.yml
+  - SnapCalculator-calculation.yml
+---
+mandatory: true
+code: |
+  #Question screen
+  HHSize
+  
+  #Print option screen
+  print_options
+  
+  #Final screen
+  if print_options['Summary'] == True or print_options['Details'] == True or print_options['Inputs'] == True:
+    downloadMe    
+  else:    
+    textOnly              
+
+---
+id: chose-no-download
+event: textOnly
+question: |
+  You have successfully completed the calculation. 
+subquestion: |  
+  You can user the "Back" button to revise your input, or restart a new interview. 
+buttons: 
+  - Exit: exit
+  - Restart: restart
+---
+id: chose-download
+event: downloadMe 
+question: |
+  You have successfully completed the calculation.<br /></br />
+  Download your results below.
+attachment:
+  name: SNAP Results 
+  filename: SNAP-Calculator-Results
+  valid formats:
+      - pdf
+  docx template file: 
+    code: |
+      finalFile
+buttons:
+  - Exit: exit
+  - Restart: restart  
+---
+code: |  
+  # Count number of selections
+  totalSelection = 0
+  if print_options['Summary']:
+    totalSelection += 1
+  if print_options['Details']:
+    totalSelection += 1
+  if print_options['Inputs']:
+    totalSelection += 1
+    
+  # define document template file 
+  if totalSelection >1 :
+    finalFile = "snap-all.docx"
+  elif print_options['Summary']:
+    finalFile= "snap-summary.docx"
+  elif print_options['Details']:        
+    finalFile = "snap-details.docx"
+  elif print_options['Inputs']:        
+    finalFile = "snap-dtaInputs.docx"
+
+
