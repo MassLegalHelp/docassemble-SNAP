@@ -1,7 +1,7 @@
 ---
 initial: True
 code: |
-  as_of_date = "Effective as of October 1, 2024"
+  as_of_date = "Effective as of February 1, 2025"
   calcDate = today()
   
   # Parameters needing (semi)annual updates
@@ -15,7 +15,7 @@ code: |
   PHONE = 62
   NON_HEATING_UTILITY = 542
   HEATING_UTILITY = 890
-  arrTwoHundredTable = [2510, 3407, 4303, 5200, 6097, 6993, 7890, 8787, 897]
+  arrTwoHundredTable = [2608, 3525, 4442, 5358, 6275, 7192, 8108, 9025, 917]
   arrStdDed = [204, 204, 204, 217, 254, 291]
   arrMaxAllowableNIC = [1255, 1704, 2152, 2600, 3049, 3497, 3945, 4394, 449]
   arrMaxSNAPAllotment = [292, 536, 768, 975, 1158, 1390, 1536, 1756, 220]
