@@ -1,24 +1,24 @@
 ---
 initial: True
 code: |
-  as_of_date = "Effective as of January 24, 2025"
+  as_of_date = "Effective as of October 1, 2025"
   calcDate = today()
   
   # Parameters needing (semi)annual updates
   PCT_TO_EARNED_INCOME_DED = 0.20
   MEDICAL_THRESHOLD = 35
-  SHELTER_DED_CAP = 712
-  HOMELESS_DED = 190
+  SHELTER_DED_CAP = 744
+  HOMELESS_DED = 199
   NET_INCOME_PCT = 0.30
   MINIMUM_SIZE_OF_HOUSEHOLD = 2
-  MINIMUM_GRANT = 23
-  PHONE = 62
-  NON_HEATING_UTILITY = 542
-  HEATING_UTILITY = 890
+  MINIMUM_GRANT = 24
+  PHONE = 64
+  NON_HEATING_UTILITY = 556
+  HEATING_UTILITY = 914
   arrTwoHundredTable = [2608, 3525, 4442, 5358, 6275, 7192, 8108, 9025, 917]
-  arrStdDed = [204, 204, 204, 217, 254, 291]
-  arrMaxAllowableNIC = [1255, 1704, 2152, 2600, 3049, 3497, 3945, 4394, 449]
-  arrMaxSNAPAllotment = [292, 536, 768, 975, 1158, 1390, 1536, 1756, 220]
+  arrStdDed = [209, 209, 209, 223, 261, 299]
+  arrMaxAllowableNIC = [1305, 1763, 2221, 2680, 3138, 3596, 4055, 4513, 459]
+  arrMaxSNAPAllotment = [298, 546, 785, 994, 1183, 1421, 1571, 1789, 218]
   # Standard utility allowance - heating, non-heating, zero util, telephone
   arrStdUtilAllowance = [HEATING_UTILITY, NON_HEATING_UTILITY, 0.00, PHONE]
   # Asset test  
