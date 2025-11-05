@@ -1,3 +1,28 @@
+license = "MIT"
+license-files = [
+    "LICENSE",
+]
+
 [build-system]
-requires = ["setuptools"]
+requires = [
+    "setuptools==80.9.0",
+]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "docassemble.SNAP"
+version = "2025.02.01"
+description = "SNAP Calculator"
+readme = "README.md"
+authors = [
+    { name = "Team effort", email = "rhahn@mlri.org" },
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://docassemble.org"
+
+[tool.setuptools.packages.find]
+where = [
+    ".",
+]

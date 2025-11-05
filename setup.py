@@ -50,11 +50,10 @@ setup(name='docassemble.SNAP',
       long_description_content_type='text/markdown',
       author='Team effort',
       author_email='rhahn@mlri.org',
-      license='The MIT License (MIT)',
+      license='MIT',
       url='https://docassemble.org',
       packages=find_namespace_packages(),
       install_requires=[],
       zip_safe=False,
       package_data=find_package_data(where='docassemble/SNAP/', package='docassemble.SNAP'),
      )
-
