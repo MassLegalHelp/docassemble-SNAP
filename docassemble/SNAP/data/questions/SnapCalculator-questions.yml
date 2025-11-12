@@ -61,19 +61,22 @@ fields:
       - Weekly: Wkly  
       - None: None
   - Monthly amount: MUI
-    datatype: currency
-    js show if: |
-      val('Uneared_Income') === "Mthly"
+    datatype: currency   
+    show if:
+      variable: Uneared_Income
+      is: Mthly
   - Biweekly amount: biWUI
     datatype: currency
     step: 1
-    js show if: |
-      val('Uneared_Income') === "biWkly"
+    show if:
+      variable: Uneared_Income
+      is: biWkly
   - Weekly amount: WUI
     datatype: currency
     step: 1
-    js show if: |
-      val('Uneared_Income') === "Wkly"
+    show if:
+      variable: Uneared_Income
+      is: Wkly
   - note: |  
       <span class="title_color">Enter Gross __*Earned*__ Income</span><br>
       Wages or salaries. For self-employment, including independent contractors, input gross income after business expenses.
@@ -86,16 +89,19 @@ fields:
       - None: None 
   - Monthly amount: MEI
     datatype: currency
-    js show if: |
-      val('Earned_Income') === "Mthly"
+    show if:
+      variable: Earned_Income
+      is: Mthly
   - Biweekly amount: biWEI
-    datatype: currency
-    js show if: |
-      val('Earned_Income') === "biWkly"
+    datatype: currency  
+    show if:
+      variable: Earned_Income
+      is: biWkly
   - Weekly amount: WEI
     datatype: currency  
-    js show if: |
-      val('Earned_Income') === "Wkly"
+    show if:
+      variable: Earned_Income
+      is: Wkly
   - html: <span class="navy"><b>Expenses</b></span>       
   - note: |
       <span class="title_color">Enter Monthly Child Support Amount</span>  
@@ -104,20 +110,24 @@ fields:
   - note: |
       <span class="title_color">Enter Monthly Medical Costs</span>      
       *A standard $155 deduction is allowed if medical expenses are $35/month or more.  But if actual expenses are greater than $190/mo, the full amount of the expenses is allowed as a deduction.
-    js show if: |
-      val('ElderlyOrDisabled') === "Yes"
+    show if:
+      variable: ElderlyOrDisabled
+      is: Yes
   - Health Care Costs, including over-the-counter health care items and transportation: MedDed
     datatype: currency        
-    js show if: |
-      val('ElderlyOrDisabled') === "Yes"
+    show if:
+      variable: ElderlyOrDisabled
+      is: Yes
   - note: |
       <span class="title_color">Enter Monthly Dependent Care Costs for Children or Disabled Adults</span>  
-    js show if: |
-      val('hasDependent') === "Yes"
+    show if:
+      variable: hasDependent
+      is: Yes
   - Include the costs of any child or adult daycare, babysitting, before/after school care, transportation: DepCareDed
     datatype: currency        
-    js show if: |
-      val('hasDependent') === "Yes"
+    show if:
+      variable: hasDependent
+      is: Yes    
   - html: <span class="title_color">Enter Monthly Shelter Costs</span>
   - Is the household currently homeless?: isHomeless  
     input type: radio
@@ -125,48 +135,40 @@ fields:
       - Yes
       - No  
   - Monthly rent or mortgage amount: RentMortgageDed
-    datatype: currency    
-    js show if: |
-      val('isHomeless') === "No"
+    datatype: currency        
+    show if:
+      variable: isHomeless
+      is: No
   - Additional monthly homeowner expenses, including homeowner insurance and property tax: HomeownerDed
     datatype: currency        
-    js show if: |
-      val('isHomeless') === "No"
-  - "Does the household have any heat or air conditioning costs (any time of year)?": paysHeatOrAC
+    show if:
+      variable: isHomeless
+      is: No  
+  - Does the household have any heat or air conditioning costs (any time of year), or received Fuel Assistance in the last 12 months?: paysAC
     input type: radio
     choices:
       - Yes
       - No    
-    js show if: |
-      val('isHomeless') === "No"
-  - "Did the household receive Fuel Assistance in the last 12 months?": receivesFuelAssistance
-    input type: radio
-    choices:
-      - Yes
-      - No    
-    js show if: |
-      val('isHomeless') === "No" && val('ElderlyOrDisabled') === "Yes" && val('paysHeatOrAC') === "No"
+    show if:
+      variable: isHomeless
+      is: No
   - Does the household pay for electricity for non-heating purposes or for trash collection?: paysElec
     input type: radio
     choices:
       - Yes
       - No    
-    js show if: |
-      val('paysHeatOrAC') === "No" && (val('ElderlyOrDisabled') === "No" || (val('receivesFuelAssistance') === "No"))
+    show if:
+      variable: paysAC
+      is: No
   - Does the household pay for its own telephone service?: paysTelephone
     input type: radio
     choices:
       - Yes
       - No    
-    js show if: |
-      val('paysElec') === "No"
+    show if:
+      variable: paysElec
+      is: No
 continue button label: See Results
-validation code: |
-  if isHomeless == "No":
-    if paysHeatOrAC == "Yes" or (ElderlyOrDisabled == "Yes" and receivesFuelAssistance == "Yes"):
-      paysAC = "Yes"
-    else:
-      paysAC = "No"
 ---
 id: downloadChoice
 comment: |

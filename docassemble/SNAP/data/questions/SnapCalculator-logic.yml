@@ -17,7 +17,7 @@ features:
     - snap.css
     - bootstrap.min.css
   #hide navbar: True 
-  debug: True
+  debug: False
 ---
 modules:
   - docassemble.base.core
