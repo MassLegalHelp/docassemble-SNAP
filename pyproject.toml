@@ -12,7 +12,9 @@ readme = "README.md"
 authors = [
     { name = "Team effort", email = "rhahn@mlri.org" },
 ]
-dependencies = []
+dependencies = [
+    "docassemble.PovertyScale",
+]
 
 [project.urls]
 Homepage = "https://docassemble.org"
