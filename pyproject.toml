@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "docassemble.SNAP"
-version = "2026.0.0"
+version = "2026.0.1"
 description = "SNAP Calculator"
 readme = "README.md"
 authors = [
