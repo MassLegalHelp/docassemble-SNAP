@@ -18,7 +18,13 @@ code: |
   arrStdDed = [209, 209, 209, 223, 261, 299]
   arrMaxAllowableNIC = [1305, 1763, 2221, 2680, 3138, 3596, 4055, 4513, 459]
   arrMaxSNAPAllotment = [298, 546, 785, 994, 1183, 1421, 1571, 1789, 218]
+  arrTwoHundredTable
   # Standard utility allowance - heating, non-heating, zero util, telephone
   arrStdUtilAllowance = [HEATING_UTILITY, NON_HEATING_UTILITY, 0.00, PHONE]
   # Asset test  
   AssetTest_Threshold = 4500
+---
+code: |
+  from docassemble.PovertyScale.poverty import poverty_scale_get_income_limit
+
+  arrTwoHundredTable = [poverty_scale_get_income_limit(i, 2/12)for i in range(1, 10)]
