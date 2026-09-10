@@ -145,7 +145,7 @@ code: |
     if HHSize <= MINIMUM_SIZE_OF_HOUSEHOLD: 
       FinalResult = max(tempFinal, MINIMUM_GRANT)
     else:
-      FinalResult = tempFinal  
+      FinalResult = max(tempFinal, 0)  
   # Asset test message
   if ApplyNetAssetTest == "Yes" and FinalResult > 0:   
     AssetTestScreenMsg = "To get SNAP benefits, your assets must be " + currency(AssetTest_Threshold) + " or less.  See the SNAP Advocacy Guide <a href='https://www.masslegalservices.org/FoodStampSNAPAdvocacyGuide'>masslegalservices.org/FoodStampSNAPAdvocacyGuide</a> for more information."
