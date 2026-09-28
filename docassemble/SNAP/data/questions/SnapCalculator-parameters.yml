@@ -16,7 +16,7 @@ code: |
   NON_HEATING_UTILITY = 575
   HEATING_UTILITY = 945
   arrStdDed = [217, 217, 217, 229, 268, 308]
-  arrMaxAllowableNIC = [1305, 1763, 2221, 2680, 3138, 3596, 4055, 4513, 459]
+  arrMaxAllowableNIC = [1330, 1804, 2277, 2750, 3224, 3697, 4170, 4644, 474]
   arrMaxSNAPAllotment = [306, 562, 808, 1023, 1217, 1463, 1616, 1841, 225]
   arrTwoHundredTable
   # Standard utility allowance - heating, non-heating, zero util, telephone
